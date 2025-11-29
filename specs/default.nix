@@ -13,8 +13,8 @@ let
       (name: attrToTags name spec.${name})
       (attrNames spec);
 
-  specType = with lib; with types;
-    submodule ({ config, name, ... }: {
+  specGroupType = with lib; with types;
+    attrsOf (submodule ({ config, name, ... }: {
       options = {
         name = mkOption {
           type = str;
@@ -43,11 +43,11 @@ let
           description = "Computed tags for the specification. This value is automatically computed from `spec` and `extraTags`.";
         };
       };
-    });
+    }));
 in
 {
   options.specs = with lib; with types; mkOption {
-    type = attrsOf (attrsOf specType);
+    type = attrsOf specGroupType;
     default = { };
     description = "A sets of Specifications.";
   };
