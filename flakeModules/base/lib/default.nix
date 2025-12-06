@@ -1,8 +1,7 @@
-{ lib, ... }:
-let
+{ lib, ... }: let
   mkSpecSubmodule = with lib; with types; {
     typeName ? "specification",
-    varType ? (attrs anything),
+    varType ? attrs,
     specType ? (attrsOf (either str (listOf (uniq str))))
   }: let
     attrToTags = with builtins; name: value:
@@ -44,7 +43,13 @@ let
       };
     };
   });
-in
-{
-  flake.lib.mkSpecSubmodule = mkSpecSubmodule;
+
+  genericType = mkSpecSubmodule {};
+  genericGroupType = lib.types.attrsOf genericType;
+in {
+  flake.lib = {
+    mkSpecSubmodule = mkSpecSubmodule;
+    types.generic = genericType;
+    types.groups.generic = genericGroupType;
+  };
 }

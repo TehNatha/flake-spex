@@ -2,11 +2,14 @@
   description = "Specification Options for Hosts, Networks, and Services";
 
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
-      { ... }:
-      let
-        specModule = import ./specs;
+      { flake-parts-lib, ... }: let
+        inherit (flake-parts-lib) importApply;
+
+        specsModule.imports = [
+          (importApply ./flakeModules/base self.lib)
+        ];
       in
       {
         systems = [
@@ -15,10 +18,10 @@
           "aarch64-linux"
           "aarch64-darwin"
         ];
-        imports = [ specModule ];
+        imports = [ specsModule ];
         flake = {
-          flakeModule = specModule;
-          flakeModules.default = specModule;
+          flakeModule = specsModule;
+          flakeModules.default = specsModule;
         };
       }
     );
