@@ -8,7 +8,7 @@
         inherit (flake-parts-lib) importApply;
 
         specsModule.imports = [
-          (importApply ./flakeModules/base self.lib)
+          ./flakeModules/specs
         ];
       in
       {
