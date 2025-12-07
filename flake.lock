@@ -35,20 +35,7 @@
     },
     "root": {
       "inputs": {
-        "flake-parts": "flake-parts",
-        "secrets": "secrets"
-      }
-    },
-    "secrets": {
-      "locked": {
-        "lastModified": 1752916239,
-        "narHash": "sha256-HuUZgJH5M2rrm2y9/xilN35m2AXwFhxbDikTDXxkMak=",
-        "path": "/home/tehnatha/Projects/nix/secrets",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/tehnatha/Projects/nix/secrets",
-        "type": "path"
+        "flake-parts": "flake-parts"
       }
     }
   },
