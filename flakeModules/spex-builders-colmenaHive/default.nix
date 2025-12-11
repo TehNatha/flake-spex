@@ -52,8 +52,8 @@ in
     // forEachHost (
       _: hostSpec: with inputs; {
         imports = [ secrets.nixosModules.secrets ]
-        ++ attrValues (filterModulesForHostSpec (modules.nixosModules) hostSpec);
-        deployment = deployment hostSpec;
+        ++ map (module: self.nixosModules.${module}) hostSpec.spec.modules
+        ++ [({ deployment = mkDeployment hostSpec; })];
       }
     );
   };
