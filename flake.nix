@@ -7,9 +7,9 @@
       { flake-parts-lib, ... }: let
         inherit (flake-parts-lib) importApply;
 
-        specsModule.imports = [
-          ./flakeModules/specs
-          ./flakeModules/specs-builders-colmenaHive
+        spexModule.imports = [
+          ./flakeModules/spex
+          ./flakeModules/spex-builders-colmenaHive
         ];
       in
       {
@@ -19,10 +19,10 @@
           "aarch64-linux"
           "aarch64-darwin"
         ];
-        imports = [ specsModule ];
+        imports = [ spexModule ];
         flake = {
-          flakeModule = specsModule;
-          flakeModules.default = specsModule;
+          flakeModule = spexModule;
+          flakeModules.default = spexModule;
         };
       }
     );

@@ -18,22 +18,22 @@
   userGroupType = mkSpecGroup userOptions;
 in {
   options = with lib; with types; {
-    specs.extra = mkOption {
+    spex.extra = mkOption {
       type = genericGroupType;
       default = { };
       description = "A set of Specifications.";
     };
-    specs.services = mkOption {
+    spex.services = mkOption {
       type = serviceGroupType;
       default = { };
       description = "A set of service Specifications.";
     };
-    specs.hosts = mkOption {
+    spex.hosts = mkOption {
       type = hostGroupType;
       default = { };
       description = "A set of host Specifications.";
     };
-    specs.users = mkOption {
+    spex.users = mkOption {
       type = userGroupType;
       default = { };
       description = "A set of user Specifications.";

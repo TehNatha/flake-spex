@@ -94,16 +94,16 @@ let
 in
 {
   options = with lib; with types; {
-    specs = mkOption {
+    spex = mkOption {
       type = attrsOf (submoduleWith);
       default = { };
-      description = "A sets of Specifications.";
+      description = "Sets of Specifications.";
     };
-    _specsInternal.typeRegistry = mkOption {
+    _spexInternal.typeRegistry = mkOption {
       type = attrs;
       default = {};
     };
   };
 
-  config._specsInternal.typeRegistry
+  config._spexInternal.typeRegistry
 }

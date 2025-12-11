@@ -8,7 +8,7 @@
 with lib;
 with builtins;
 let
-  hosts = config.specs.hosts;
+  hosts = config.spex.hosts;
 
   forEachHost = builder: (mapAttrs builder hosts);
   forModuleIn = hostSpec: (moduleName: _: elem moduleName (hostSpec.spec.modules ++ [hostSpec.name]) );
