@@ -9,6 +9,7 @@
 
         specsModule.imports = [
           ./flakeModules/specs
+          ./flakeModules/specs-builders-colmenaHive
         ];
       in
       {
@@ -26,5 +27,5 @@
       }
     );
 
-  inputs.flake-parts.url = "github:hercules-ci/flake-parts";
+    inputs.flake-parts.url = "github:hercules-ci/flake-parts";
 }
