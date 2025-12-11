@@ -9,7 +9,7 @@ lib: with lib; with types; {
       };
     };
   };
-  specType = submodule {
+  specType = submodule ({ config, ...}: {
     options = {
       platform = mkOption {
         type = enum [
@@ -54,5 +54,5 @@ lib: with lib; with types; {
         description = "Host modules";
       };
     };
-  };
+  });
 }
