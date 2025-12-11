@@ -36,7 +36,7 @@ in submodule ({ config, name, ... }: {
     };
     tags = mkOption {
       type = listOf (uniq str);
-      default = specToTags config.spec ++ config.extraTags;
+      default = specToTags config.spec ++ config.spec.extraTag;
       readOnly = true;
       description = "Computed tags for the specification. This value is automatically computed from `spec` and `extraTags`.";
     };
