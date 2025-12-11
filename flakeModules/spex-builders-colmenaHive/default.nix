@@ -16,18 +16,23 @@ let
   filterModulesForHostSpec =
     modules: hostSpec: filterAttrs (forModuleIn hostSpec) modules;
 
-  deployment = spec: {
-    targetHost = "${spec.name}.${spec.spec.network}";
+  mkKeys = { hostSpec, keys?{ machine-id = "/etc"; } }:
+    mapAttrs
+    (key: dir:
+      mkIf (with hostSpec; hasAttr key vars && vars.${key} != null) {
+        destDir = dir;
+        permissions = "0444";
+        text = spec.vars.${key};
+      }
+    )
+    keys;
+
+  mkDeployment = hostSpec: {
+    targetHost = "${hostSpec.name}.${hostSpec.spec.network}";
     targetPort = 22;
     targetUser = "colmena";
-    tags = spec.tags;
-
-    keys.machine-id =
-      mkIf (with spec; hasAttr "machineId" vars && vars.machineId != null) {
-        destDir = "/etc";
-        permissions = "0444";
-        text = spec.vars.machineId;
-      };
+    tags = hostSpec.tags;
+    keys = mkKeys { inherit hostSpec; };
   };
 in
 {
